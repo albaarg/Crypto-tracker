@@ -1,14 +1,16 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import styled from 'styled-components/native';
-import {Container, MyText, AvatarImage} from './index'
+import {Container, MyText, AvatarImage} from './styles'
 
 const Header = () => {
   return (
+    <SafeAreaView>
     <Container>
       <MyText>CryptoTracker Pro</MyText>
       <AvatarImage source={{uri: 'https://picsum.photos/id/237/200/300'}}/>
     </Container>
+    </SafeAreaView>
   )
 }
 
