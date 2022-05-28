@@ -37,7 +37,7 @@ const ListCrypto = ({data} : props) => {
    const removeHandle = (id: number | string) => {
     Alert.alert(
       'Eliminar Cripto',
-      'Estas seguro de eliminar la cripto?',
+      'Estas seguro de eliminar la cripto???',
       [
         {
           text: "Cancel",
