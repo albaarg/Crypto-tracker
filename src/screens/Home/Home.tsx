@@ -30,7 +30,8 @@ const Home = ({ navigation }: Props) => {
   const [crryptos, SetCrryptos] = useState<Cripto[]>([])
 
   const getPricing = async (options: { start?: number; limit: number }) => {
-    const { start, limit } = options;
+    const { start } = options;
+    const { limit } =options;
     setLoading(true);
 
     try {
@@ -59,7 +60,7 @@ const Home = ({ navigation }: Props) => {
       <Header />
       {loading ? <ActivityIndicator size='large' /> : (
         <ListContainer>
-          {crryptos && crryptos.map((crypto, index) => <ListCrypto key={index} data={crypto} />)}
+          {crryptos && crryptos.map(item => <ListCrypto key={item.id} data={item} />)}
           <MyButton onPress={() => { navigation.navigate("Crypto") }}>
             <TextButton>+ Add a cryptocurrency</TextButton>
           </MyButton>
