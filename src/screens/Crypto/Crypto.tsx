@@ -1,12 +1,13 @@
-import React, {useState} from 'react'
-import { View, Text, SafeAreaView, TextInput, Image, TouchableOpacity, Alert} from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, SafeAreaView, TextInput, Image, TouchableOpacity, Alert } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from './../../../App';
-import {Container, AddCrypto, AddButton, TextAdd, Background, SearchCrypto, ViewInput} from './styles'
-import {ArrowButton, IconButton} from '../../components/Button'
+import { Container, AddCrypto, AddButton, TextAdd, Background, SearchCrypto, ViewInput } from './styles'
+import { ArrowButton, IconButton } from '../../components/Button'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPricings } from '../../store/selectors/crypto';
-import {SetCrypto} from '../../storage/storage';
+import { SetCrypto } from '../../storage/storage';
+import ListCrypto from '../../components/ListCrypto';
 
 type SectionScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -17,13 +18,14 @@ type Props = {
   navigation: SectionScreenNavigationProp;
 };
 
-const Crypto = ({navigation}: Props) => {
+const Crypto = ({ navigation }: Props) => {
   const [search, SetSearch] = useState('')
   const crryptos = useSelector(getPricings)
 
+
   const SaveCrypto = () => {
     const FindCrypto = crryptos.find(crypto => crypto.symbol.toUpperCase() === search.toUpperCase());
-    
+
     if (!FindCrypto) {
       Alert.alert('No se encontro alguna cripto con: ' + FindCrypto);
     } else {
@@ -33,17 +35,17 @@ const Crypto = ({navigation}: Props) => {
   return (
     <SafeAreaView>
       <Background>
-      <ArrowButton onPress={() =>navigation.goBack()} >
-        <IconButton source={require('../../assets/icons/left.png')}/>
+        <ArrowButton onPress={() => navigation.goBack()} >
+          <IconButton source={require('../../assets/icons/left.png')} />
         </ArrowButton>
-      <Container>
-      <AddCrypto>Add a Cryptocurrency</AddCrypto>
-      <ViewInput>
-      <SearchCrypto placeholder="Use a name or ticker symbol..." onChangeText={value => SetSearch(value)}/>
-      </ViewInput>
-      <AddButton onPress={SaveCrypto}><TextAdd>Add</TextAdd></AddButton>
-    </Container>
-    </Background>
+        <Container>
+          <AddCrypto>Add a Cryptocurrency</AddCrypto>
+          <ViewInput>
+            <SearchCrypto placeholder="Use a name or ticker symbol..." onChangeText={value => SetSearch(value)} />
+          </ViewInput>
+          <AddButton onPress={SaveCrypto}><TextAdd>Add</TextAdd></AddButton>
+        </Container>
+      </Background>
     </SafeAreaView>
   )
 }
