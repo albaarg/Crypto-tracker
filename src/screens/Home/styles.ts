@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image,TouchableOpacity} from 'react-native';
 
 //HomeScreen
 export const ListContainer = styled.View`
-display:flex
-width:100%
-height:200%
+display:flex;
+width:100%;
+height:100%;
 `
 export const MyButton = styled.TouchableOpacity`
 widht: 50%
@@ -19,5 +19,10 @@ margin:20px
 export const TextButton = styled.Text`
 color:#0c4a6e
 `
-
+export const TitleText = styled.Text`
+padding:8px
+color:#0c4a6e
+`
+export const ContainerTitle = styled.View`
+align-items:center`
 

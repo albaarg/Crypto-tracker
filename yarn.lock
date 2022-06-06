@@ -1531,17 +1531,18 @@
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   "version" "15.7.5"
 
+"@types/react-native@^0.57.65":
+  "integrity" "sha512-7P5ulTb+/cnwbABWaAjzKmSYkRWeK7UCTfUwHhDpnwxdiL2X/KbdN1sPgo0B2E4zxfYE3MEoHv7FhB8Acfvf8A=="
+  "resolved" "https://registry.npmjs.org/@types/react-native/-/react-native-0.57.65.tgz"
+  "version" "0.57.65"
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/react" "*"
+
 "@types/react-native@^0.65":
   "integrity" "sha512-3M5ukXrxuoMHlH6pF+HVcudX3SoUUynmUJiTZqPPSY/wDlFVOfbf0P21F7gkXeHbsZ6RbZfoQfQMR6rs7xsPDA=="
   "resolved" "https://registry.npmjs.org/@types/react-native/-/react-native-0.65.22.tgz"
   "version" "0.65.22"
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-native@^0.67.7":
-  "integrity" "sha512-G7vi9vE226diNNXVNbIa8HH/wPxMWHTHkn9iQtQSezaWzO5WNsKZZW2/TOzCehtBDVx4MZieTs6GsdtpBBttMA=="
-  "resolved" "https://registry.npmjs.org/@types/react-native/-/react-native-0.67.7.tgz"
-  "version" "0.67.7"
   dependencies:
     "@types/react" "*"
 
@@ -1617,6 +1618,11 @@
   "version" "16.0.4"
   dependencies:
     "@types/yargs-parser" "*"
+
+"@types/yup@^0.29.14":
+  "integrity" "sha512-Ynb/CjHhE/Xp/4bhHmQC4U1Ox+I2OpfRYF3dnNgQqn1cHa6LK3H1wJMNPT02tSVZA6FYuXE2ITORfbnb6zBCSA=="
+  "resolved" "https://registry.npmjs.org/@types/yup/-/yup-0.29.14.tgz"
+  "version" "0.29.14"
 
 "@typescript-eslint/eslint-plugin@^3.1.0":
   "integrity" "sha512-PQg0emRtzZFWq6PxBcdxRH3QIQiyFO3WCVpRL3fgj5oQS3CDs3AeAKfv4DxNhzn8ITdNJGJ4D3Qw8eAJf3lXeQ=="
