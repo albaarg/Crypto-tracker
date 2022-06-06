@@ -8,6 +8,7 @@ import { CloseButton } from '../components/Button';
 type props = {
   data: Cripto
 }
+
 const ListCrypto = ({ data }: props) => {
   const getImageArrow = () => {
     if (data.percent_change_1h > 0) {
@@ -37,8 +38,8 @@ const ListCrypto = ({ data }: props) => {
 
   const removeHandle = (id: number | string) => {
     Alert.alert(
-      'Eliminar Cripto',
-      'Estas seguro de eliminar la cripto?',
+      'Delete Crypto',
+      'Are you sure delete crypto?',
       [
         {
           text: "Cancel",
@@ -48,11 +49,12 @@ const ListCrypto = ({ data }: props) => {
         { text: "OK", onPress: () => RemoveCrypto(id) }
       ]
     );
+
   }
   return (
     <WrapperContainer>
       <ItemWrapper>
-        <LeftWrapper>
+        <LeftWrapper> 
           <TouchableOpacity onPress={() => removeHandle(data.id)}>
             <CloseButton source={require('../assets/icons/close-ing.png')} />
           </TouchableOpacity>

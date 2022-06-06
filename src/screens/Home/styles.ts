@@ -19,5 +19,10 @@ margin:20px
 export const TextButton = styled.Text`
 color:#0c4a6e
 `
-
+export const TitleText = styled.Text`
+padding:8px
+color:#0c4a6e
+`
+export const ContainerTitle = styled.View`
+align-items:center`
 

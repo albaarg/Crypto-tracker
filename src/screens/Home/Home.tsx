@@ -6,7 +6,7 @@ import Header from '../../components/Header';
 import Crypto from '../../screens/Crypto/Crypto';
 import ListCrypto from '../../components/ListCrypto'
 import styled from 'styled-components/native';
-import { MyButton, TextButton, ListContainer } from './styles';
+import { MyButton, TextButton, ListContainer, TitleText, ContainerTitle } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOAD_PRICING } from '../../types';
 import { getPricings } from '../../store/selectors/crypto';
@@ -26,12 +26,13 @@ type Props = {
 
 const Home = ({ navigation }: Props) => {
   const [loading, setLoading] = useState(false)
+  const [refreshCrypto] = useState(true);
   const dispatch = useDispatch()
   const [crryptos, SetCrryptos] = useState<Cripto[]>([])
 
   const getPricing = async (options: { start?: number; limit: number }) => {
     const { start } = options;
-    const { limit } =options;
+    const { limit } = options;
     setLoading(true);
 
     try {
@@ -51,13 +52,17 @@ const Home = ({ navigation }: Props) => {
 
   useEffect(() => {
     getPricing({ limit: 5 });
-    GetCrypto().then(value => SetCrryptos(value));
-  }, [])
-
+    if (refreshCrypto) {
+      GetCrypto().then(value => SetCrryptos(value));
+    }
+  }, [refreshCrypto])
 
   return (
     <ScrollView>
       <Header />
+      <ContainerTitle>
+        <TitleText>{crryptos.length > 0 ? "My List" : "No coins added yet"}</TitleText>
+      </ContainerTitle>
       {loading ? <ActivityIndicator size='large' /> : (
         <ListContainer>
           {crryptos && crryptos.map(item => <ListCrypto key={item.id} data={item} />)}
