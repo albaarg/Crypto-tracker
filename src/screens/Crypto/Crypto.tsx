@@ -26,11 +26,10 @@ const Crypto = ({ navigation }: Props) => {
     const FindCrypto = crryptos.find(crypto => {
       return crypto.symbol.toString().toLowerCase().includes(search.toString().toLowerCase())
         || crypto.name.toString().toLowerCase().includes(search.toString().toLowerCase());
-
     })
 
     if (!FindCrypto) {
-      Alert.alert('No se encontro alguna cripto con: ' + FindCrypto);
+      Alert.alert('Coin not found: ' + FindCrypto);
     } else {
       let listcrypto = GetCrypto().then(value => {
         let ExistCrypto = false
