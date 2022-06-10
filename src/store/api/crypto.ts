@@ -4,8 +4,7 @@ export const getPricing = async () => {
 
   const result = await response.json()
   return result.data
-  } catch (error:any) {
-    console.log(error.message)
+  } catch (error) {
   }
   
 }
