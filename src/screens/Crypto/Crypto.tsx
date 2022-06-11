@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPricings } from '../../store/selectors/crypto';
 import { SetCrypto, GetCrypto } from '../../storage/storage';
 import ListCrypto from '../../components/ListCrypto';
+import { Left } from '../../assets/index';
 
 type SectionScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -20,27 +21,25 @@ type Props = {
 
 const Crypto = ({ navigation }: Props) => {
   const [search, SetSearch] = useState('')
-  const crryptos = useSelector(getPricings)
+  const cryptos = useSelector(getPricings)
 
   const SaveCrypto = () => {
-    const FindCrypto = crryptos.find(crypto => {
+    const FindCrypto = cryptos.find(crypto => {
       return crypto.symbol.toString().toLowerCase().includes(search.toString().toLowerCase())
         || crypto.name.toString().toLowerCase().includes(search.toString().toLowerCase());
     })
-
     if (!FindCrypto) {
       Alert.alert('Coin not found: ' + FindCrypto);
     } else {
-      let listcrypto = GetCrypto().then(value => {
-        let ExistCrypto = false
+      const listCrypto = GetCrypto().then(value => {
+        let existCrypto = false
         value.forEach(element => {
           if ((element.symbol.toString().toLowerCase() === search.toString().toLowerCase()) ||
             (element.name.toString().toLowerCase() === search.toString().toLowerCase())) {
-            ExistCrypto = true
+            existCrypto = true
           }
         })
-
-        if (ExistCrypto) {
+        if (existCrypto) {
           Alert.alert('Its already on the list')
           navigation.push('Home')
         } else {
@@ -53,15 +52,17 @@ const Crypto = ({ navigation }: Props) => {
   return (
     <SafeAreaView>
       <Background>
-        <ArrowButton onPress={() => navigation.goBack()} >
-          <IconButton source={require('../../assets/icons/left.png')} />
+        <ArrowButton onPress={navigation.goBack.bind(null)} >
+          <IconButton source={Left} />
         </ArrowButton>
         <Container>
-          <AddCrypto>Add a Cryptocurrency</AddCrypto>
+          <AddCrypto> Add a Cryptocurrency </AddCrypto>
           <ViewInput>
             <SearchCrypto placeholder="Use a name or ticker symbol..." onChangeText={value => SetSearch(value)} />
           </ViewInput>
-          <AddButton onPress={SaveCrypto}><TextAdd>Add</TextAdd></AddButton>
+          <AddButton onPress={SaveCrypto}>
+            <TextAdd>Add</TextAdd>
+          </AddButton>
         </Container>
       </Background>
     </SafeAreaView>

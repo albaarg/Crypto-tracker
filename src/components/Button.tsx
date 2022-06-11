@@ -10,10 +10,10 @@ export const ArrowButton = styled.TouchableOpacity`
 position:relative
 margin:8px
 `
-export const CloseButton = styled.Image`
-width:8px
-height:8px
-position:relative
-`
+ export const CloseButton = styled.Image`
+ width:6px
+ height:6px
+ position:relative
+ `
 
 

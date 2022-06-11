@@ -1,36 +1,37 @@
-import React from 'react'
+import * as React from 'react'
 import { TouchableOpacity, View, Alert, ScrollView } from 'react-native'
-import { ItemWrapper, Title, TitleWrapper, SubTitle, CryptoImage, LeftWrapper, RightWrapper, ItemPrice, WrapperContainer, ArrowView, ArrowImage } from './styles';
-import { Cripto } from '../../src/interfaces/cripto'
+import { ItemWrapper, Title, TitleWrapper, SubTitle, CryptoImage, LeftWrapper, RightWrapper, WrapperContainer, ArrowView, ArrowImage } from './styles';
+import { Coin } from '../../src/interfaces/Coin'
 import { RemoveCrypto } from '../storage/storage';
 import { CloseButton } from '../components/Button';
+import {  Arrow, Arrow2, Bitcoin, Bnb, Close, Ethereum, Usdc, Usdt } from '../assets/index';
 
 type props = {
-  data: Cripto
+  data: Coin
 }
 
 const ListCrypto = ({ data }: props) => {
   const getImageArrow = () => {
     if (data.percent_change_1h > 0) {
-      return require('../assets/icons/arrow2.jpeg')
+      return (Arrow2)
     }
     else {
-      return require('../assets/icons/arrow1.jpeg')
+      return (Arrow)
     }
   }
 
   const getImageSymbol = () => {
     switch (data.symbol) {
       case 'BTC':
-        return require('../assets/icons/bitcoin.png')
+        return (Bitcoin)
       case 'ETH':
-        return require('../assets/icons/ethereum.jpeg')
+        return (Ethereum)
       case 'USDT':
-        return require('../assets/icons/usdt.jpeg')
+        return (Usdt)
       case 'BNB':
-        return require('../assets/icons/bnb.jpeg')
+        return (Bnb)
       case 'USDC':
-        return require('../assets/icons/usdc.jpeg')
+        return (Usdc)
       default:
         return { uri: "https://picsum.photos/seed/picsum/200/300" }
     }
@@ -49,19 +50,17 @@ const ListCrypto = ({ data }: props) => {
         { text: "OK", onPress: () => RemoveCrypto(id) }
       ]
     );
-
   }
   return (
     <WrapperContainer>
       <ItemWrapper>
-        <LeftWrapper> 
-          <TouchableOpacity onPress={() => removeHandle(data.id)}>
-            <CloseButton source={require('../assets/icons/close-ing.png')} />
+        <LeftWrapper>
+          <TouchableOpacity onPress={removeHandle.bind(null, data.id)}>
+            <CloseButton source={Close} />
           </TouchableOpacity>
           <CryptoImage source={getImageSymbol()} />
           <TitleWrapper>
             <Title >{data.name}</Title>
-            {"\n"}
             <SubTitle>{data.symbol}</SubTitle>
           </TitleWrapper>
         </LeftWrapper>

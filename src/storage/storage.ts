@@ -1,24 +1,24 @@
 import asyncstorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 import { string } from 'yup';
-import { Cripto } from '../interfaces/cripto';
+import { Coin } from '../interfaces/Coin';
 
-export const SetCrypto = async (data: Cripto) => {
+export const SetCrypto = async (data: Coin) => {
   try {
-    const AllCriptos = await GetCrypto();
-    await asyncstorage.setItem('My-lista-de-cryptos', JSON.stringify([...AllCriptos, data]));
+    const AllCryptos = await GetCrypto();
+    await asyncstorage.setItem('My-lista-de-cryptos', JSON.stringify([...AllCryptos, data]));
     Alert.alert('Added correctly')
-  } catch (error: any) {
-    Alert.alert(error.message)
+  } catch (error) {
+    console.error(error)
   }
 }
 
 export const GetCrypto = async () => {
   try {
     const ResultCrypto = await asyncstorage.getItem('My-lista-de-cryptos')
-    return JSON.parse(ResultCrypto || "[]") as Cripto[];
-  } catch (error: any) {
-    Alert.alert(error.message)
+    return JSON.parse(ResultCrypto || "[]") as Coin[];
+  } catch (error) {
+    console.log(error)
     return []
   }
 }
@@ -26,12 +26,12 @@ export const GetCrypto = async () => {
 export const RemoveCrypto = async (id: number | string) => {
   try {
     const AllCripto = await GetCrypto().then(value => {
-      const filterCripto = value.filter(cripto => cripto.id !== id);
-      UpdateListCrypto(filterCripto)
-      Alert.alert('Se elimino la cripto correctamente')
+      const filterCoin = value.filter(Coin => Coin.id !== id);
+      UpdateListCrypto(filterCoin)
+      Alert.alert('Was deleted correctly')
     });
-  } catch (error: any) {
-    Alert.alert(error.message)
+  } catch (error) {
+    console.log(error)
     return []
   }
 }
@@ -39,8 +39,8 @@ export const RemoveCrypto = async (id: number | string) => {
 export const UpdateListCrypto = async (filterCripto: any) => {
   try {
     await asyncstorage.setItem('My-lista-de-cryptos', JSON.stringify(filterCripto))
-  } catch (error: any) {
-    Alert.alert(error.message)
+  } catch (error) {
+    console.log(error)
     return []
   }
 }

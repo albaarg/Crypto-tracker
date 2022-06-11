@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {Colors} from '../theme/index'
 
 //Header
 export const Container = styled.View `
-background-color:#0c4a6e
+background-color:${Colors.container}
 paddingHorizontal:22px
 padding-top:20px
 padding-bottom:20px
@@ -14,7 +15,7 @@ align-items:center
 `
 export const MyText = styled.Text `
 font-size:22px
-color:white
+color:${Colors.white}
 font-weight:bold
 margin:10px
 `
@@ -48,21 +49,18 @@ export const Title = styled.Text`
 width:100%
 font-size:18px
 font-weight:bold
-color:black
+color:${Colors.black}
 `
 export const SubTitle = styled.Text`
 font-size:14px
 margin-top:4px
-color:#A9ABB1
+color:${Colors.gray}
 `
-export const TitleWrapper = styled.Text`
-margin-left:18px
+export const TitleWrapper = styled.View`
+margin-left:15px
 `
 export const RightWrapper = styled.View`
 align-items:flex-end
-`
-export const ItemPrice = styled.View`
-color:red
 `
 export const ArrowView = styled.View`
 flex-direction:row

@@ -12,7 +12,7 @@ import { LOAD_PRICING } from '../../types';
 import { getPricings } from '../../store/selectors/crypto';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GetCrypto } from '../../storage/storage'
-import { Cripto } from '../../interfaces/cripto';
+import { Coin } from '../../interfaces/Coin';
 import asyncstorage from '@react-native-async-storage/async-storage';
 
 type SectionScreenNavigationProp = StackNavigationProp<
@@ -26,9 +26,8 @@ type Props = {
 
 const Home = ({ navigation }: Props) => {
   const [loading, setLoading] = useState(false)
-  const [refreshCrypto] = useState(true);
   const dispatch = useDispatch()
-  const [crryptos, SetCrryptos] = useState<Cripto[]>([])
+  const [cryptos, SetCryptos] = useState<Coin[]>([])
 
   const getPricing = async (options: { start?: number; limit: number }) => {
     const { start } = options;
@@ -44,35 +43,31 @@ const Home = ({ navigation }: Props) => {
         type: LOAD_PRICING
       });
       setLoading(false)
-    } catch (error: any) {
+    } catch (error) {
       setLoading(false)
-      console.log(error.message)
     }
   }
 
   useEffect(() => {
     getPricing({ limit: 5 });
-    if (refreshCrypto) {
-      GetCrypto().then(value => SetCrryptos(value));
-    }
-  }, [refreshCrypto])
+    GetCrypto().then(value => SetCryptos(value));
+  }, [])
 
   return (
     <ScrollView>
       <Header />
       <ContainerTitle>
-        <TitleText>{crryptos.length > 0 ? "My List" : "No coins added yet"}</TitleText>
+        <TitleText>{cryptos.length > 0 ? "My List" : "No coins added yet"}</TitleText>
       </ContainerTitle>
       {loading ? <ActivityIndicator size='large' /> : (
         <ListContainer>
-          {crryptos && crryptos.map(item => <ListCrypto key={item.id} data={item} />)}
-          <MyButton onPress={() => { navigation.navigate("Crypto") }}>
+          {cryptos && cryptos.map(item => <ListCrypto key={item.id} data={item} />)}
+          <MyButton onPress={() => navigation.navigate.bind(null)("Crypto")}>
             <TextButton>+ Add a cryptocurrency</TextButton>
           </MyButton>
         </ListContainer>
       )}
     </ScrollView>
-
   )
 }
 

@@ -19,7 +19,7 @@ const theme = {
   ...DefaultTheme,
   colors:{
     ...DefaultTheme.colors,
-    background: "transparent"
+    background: "white"
   }
 }
 

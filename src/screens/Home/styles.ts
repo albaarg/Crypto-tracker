@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {View, Text, Image,TouchableOpacity} from 'react-native';
+import {Colors} from '../../theme/index';
 
 //HomeScreen
 export const ListContainer = styled.View`
@@ -17,11 +18,11 @@ justify-content:center
 margin:20px
 `
 export const TextButton = styled.Text`
-color:#0c4a6e
+color:${Colors.primary}
 `
 export const TitleText = styled.Text`
 padding:8px
-color:#0c4a6e
+color:${Colors.primary}
 `
 export const ContainerTitle = styled.View`
 align-items:center`
