@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, {useEffect, useState} from 'react'
 import { TouchableOpacity, View, Alert, ScrollView } from 'react-native'
 import { ItemWrapper, Title, TitleWrapper, SubTitle, CryptoImage, LeftWrapper, RightWrapper, WrapperContainer, ArrowView, ArrowImage } from './styles';
 import { Coin } from '../../src/interfaces/Coin'
@@ -51,6 +51,7 @@ const ListCrypto = ({ data }: props) => {
       ]
     );
   }
+
   return (
     <WrapperContainer>
       <ItemWrapper>
@@ -68,7 +69,7 @@ const ListCrypto = ({ data }: props) => {
           <Title>${data.price_usd}</Title>
           <ArrowView>
             <ArrowImage source={getImageArrow()} />
-            <SubTitle>{data.percent_change_24h}</SubTitle>
+            <SubTitle>{data.percent_change_1h}</SubTitle>
           </ArrowView>
         </RightWrapper>
       </ItemWrapper>

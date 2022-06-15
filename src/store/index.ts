@@ -1,7 +1,6 @@
 import { createStore, compose, applyMiddleware, Action } from 'redux'
 import thunkMiddleware, { ThunkAction } from 'redux-thunk'
 import rootReducer from './reducers'
-// import { CryptoActionsType } from './actions/crypto';
 
 const middlewares = [ thunkMiddleware ]
 
@@ -10,7 +9,6 @@ const store =
 
 
 export type RootAction = {
-  // type: CryptoActionsType;
   payload: any
 }
 
