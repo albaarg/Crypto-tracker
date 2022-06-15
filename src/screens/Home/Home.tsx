@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, View, Text, AppState, AppStateStatus } from 'react-native'
+import { ScrollView, View, Text } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from './../../../App';
 import Header from '../../components/Header';
@@ -29,9 +29,7 @@ const Home = ({ navigation }: Props) => {
   const [cryptos, SetCryptos] = useState<Coin[]>([])
   const [priceRefresh, setPriceRefresh] = useState(false)
 
-  const getPricing = async (options: { start?: number; limit: number }) => {
-    const { start } = options;
-    const { limit } = options;
+  const getPricing = async ({start, limit}: { start?: number; limit: number }) => {
     
     try {
       const response = await fetch(`https://api.coinlore.net/api/tickers?start=${start || 0}&limit=${limit}`);
