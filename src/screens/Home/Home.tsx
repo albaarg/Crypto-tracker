@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, ScrollView, View, Text, FlatList } from 'react-native'
+import { ScrollView, View, Text, AppState, AppStateStatus } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from './../../../App';
 import Header from '../../components/Header';
@@ -25,15 +25,14 @@ type Props = {
 };
 
 const Home = ({ navigation }: Props) => {
-  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
   const [cryptos, SetCryptos] = useState<Coin[]>([])
+  const [priceRefresh, setPriceRefresh] = useState(false)
 
   const getPricing = async (options: { start?: number; limit: number }) => {
     const { start } = options;
     const { limit } = options;
-    setLoading(true);
-
+    
     try {
       const response = await fetch(`https://api.coinlore.net/api/tickers?start=${start || 0}&limit=${limit}`);
       const result = await response.json();
@@ -42,16 +41,28 @@ const Home = ({ navigation }: Props) => {
         payload: result.data,
         type: LOAD_PRICING
       });
-      setLoading(false)
+
+      SetCryptos(result.data)
+
+      if (response) {
+        setTimeout(() => {
+          setPriceRefresh(!priceRefresh)
+        }, 2000)
+      }
     } catch (error) {
-      setLoading(false)
+      console.log(error)
     }
   }
 
   useEffect(() => {
-    getPricing({ limit: 5 });
-    GetCrypto().then(value => SetCryptos(value));
+    GetCrypto().then(value =>
+      SetCryptos(value)
+    );
   }, [])
+
+  useEffect(() => {
+    getPricing({ limit: 5 })
+  }, [priceRefresh])
 
   return (
     <ScrollView>
@@ -59,14 +70,12 @@ const Home = ({ navigation }: Props) => {
       <ContainerTitle>
         <TitleText>{cryptos.length > 0 ? "My List" : "No coins added yet"}</TitleText>
       </ContainerTitle>
-      {loading ? <ActivityIndicator size='large' /> : (
         <ListContainer>
           {cryptos && cryptos.map(item => <ListCrypto key={item.id} data={item} />)}
           <MyButton onPress={() => navigation.navigate.bind(null)("Crypto")}>
             <TextButton>+ Add a cryptocurrency</TextButton>
           </MyButton>
         </ListContainer>
-      )}
     </ScrollView>
   )
 }

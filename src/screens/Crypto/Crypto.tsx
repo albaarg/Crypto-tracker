@@ -52,7 +52,7 @@ const Crypto = ({ navigation }: Props) => {
   return (
     <SafeAreaView>
       <Background>
-        <ArrowButton onPress={navigation.goBack.bind(null)} >
+        <ArrowButton onPress={() => navigation.goBack()}>
           <IconButton source={Left} />
         </ArrowButton>
         <Container>
